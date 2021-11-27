@@ -30,7 +30,7 @@ $ ./configure --enable-optimizations
 - `-j` オプションで指定する値は `nproc` コマンドで確認できます
 
 ```
-$ mak -j 4
+$ make -j 4
 ```
 
 ## 4. インストール
