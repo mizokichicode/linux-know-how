@@ -163,20 +163,23 @@ identityfile ~/.ssh/id_ed25519
 
 ```
 $ wget -qO- https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o ./docker.gpg
-$ sudo install -o root -g root -m 644 docker.gpg /etc/apt/trusted.gpg.d/
+$ sudo install -o root -g root -m 644 docker.gpg /etc/apt/keyrings/
 ```
+
+!!! warning
+    サードパーティ製のGPG鍵を`/etc/apt/trusted.gpg.d`で管理することは**非推奨**となっています。
 
 #### 公式リポジトリの追加
 
 ```
-$ sudo sh -c 'echo "deb [arch=amd64 signed=/etc/apt/trusted.gpg.d/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" > /etc/apt/sources.list.d/docker.list'
+$ sudo sh -c 'echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" > /etc/apt/sources.list.d/docker.list'
 ```
 
 #### docker community editionのインストール
 
 ```
 $ sudo apt update
-$ sudo apt install docker-ce docker-compose
+$ sudo apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 ```
 
 ### 設定
