@@ -676,13 +676,17 @@ $ sudo systemctl restart apache2
 
 ```
 $ wget -qO- https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o ./docker.gpg
-$ sudo install -o root -g root -m 644 docker.gpg /etc/apt/trusted.gpg.d/
+$ sudo install -o root -g root -m 644 docker.gpg /etc/apt/keyrings/
 ```
+
+!!! warning
+    サードパーティ製のGPG鍵を`/etc/apt/trusted.gpg.d`で管理することは**非推奨**となっています。
+    
 
 #### docker 公式リポジトリの追加
 
 ```
-$ sudo sh -c 'echo "deb [arch=amd64 signed-by=/etc/apt/trustd.gpg.d/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" > /etc/apt/sources.list.d/docker.list'
+$ sudo sh -c 'echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" > /etc/apt/sources.list.d/docker.list'
 ```
 
 #### パッケージリストの更新
@@ -696,7 +700,7 @@ $ sudo apt update
 * docker 公式の docker engin をインストールします
 
 ```
-$ sudo apt install docker-ce
+$ sudo apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 ```
 
 ### docker グループへユーザーの追加
